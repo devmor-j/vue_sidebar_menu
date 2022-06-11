@@ -7,5 +7,8 @@
 </template>
 
 <style scoped lang="scss">
+svg {
+  transform: rotateZ(90deg);
+}
 // .clr-i-outline {}
 </style>

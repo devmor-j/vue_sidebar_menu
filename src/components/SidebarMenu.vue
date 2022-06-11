@@ -15,7 +15,7 @@ import IconHome from './icons/IconHome.vue';
           <img src="@/assets/logo.png" alt="logo" width="32" height="32">
         </li>
         <li>
-          <button>
+          <button class="sidebar-toggle">
             <IconAngle />
           </button>
         </li>
@@ -44,4 +44,24 @@ import IconHome from './icons/IconHome.vue';
 </template>
 
 <style scoped lang="scss">
+@use '@/assets/scss/colors' as clr;
+
+aside {
+  color: clr.$primary;
+  background: clr.$bg-dark;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 1rem;
+}
+
+ul > li {
+  display: flex;
+  align-items: center;
+  column-gap: 0.75rem;
+}
+
+button {
+  cursor: pointer;
+}
 </style>
