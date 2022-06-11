@@ -28,22 +28,32 @@ function toggleSidebar() {
         </li>
       </ul>
 
+      <span :transparent="!isSidebarOpen">Menu</span>
+
       <ul>
         <li>
           <IconHome />
-          <a href="/">Home</a>
+          <Transition name="fade">
+            <a href="/" v-show="isSidebarOpen">Home</a>
+          </Transition>
         </li>
         <li>
           <IconExclamation />
-          <a href="/about">About</a>
+          <Transition name="fade">
+            <a href="/about" v-show="isSidebarOpen">About</a>
+          </Transition>
         </li>
         <li>
           <IconEmployeeGroup />
-          <a href="/team">Team</a>
+          <Transition name="fade">
+            <a href="/team" v-show="isSidebarOpen">Team</a>
+          </Transition>
         </li>
         <li>
           <IconEmail />
-          <a href="/contact">Contact</a>
+          <Transition name="fade">
+            <a href="/contact" v-show="isSidebarOpen">Contact</a>
+          </Transition>
         </li>
       </ul>
     </aside>
@@ -53,7 +63,7 @@ function toggleSidebar() {
 <style scoped lang="scss">
 @use '@/assets/scss/colors' as clr;
 
-$sidebar-width: 10rem;
+$sidebar-width: 4rem;
 $toggle-duration: 300ms;
 
 aside {
@@ -68,22 +78,42 @@ aside {
 }
 
 aside[vue\:is-open=true] {
-  width: 2 * $sidebar-width;
+  width: 3 * $sidebar-width;
 }
 
 ul > li {
   display: flex;
   align-items: center;
   column-gap: 0.75rem;
+  padding-block-end: 1rem;
 }
 
 img {
   object-fit: contain;
 }
 
+li {
+  min-width: fit-content;
+}
+
 .sidebar-head {
   position: relative;
-  padding-block-end: 4rem;
+  // padding-block-end: 4rem;
+}
+
+span {
+  padding-block-end: 1rem;
+  user-select: none;
+  pointer-events: none;
+  opacity: 0.5;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.125ch;
+  transition: opacity $toggle-duration;
+}
+
+span[transparent=true] {
+  opacity: 0;
 }
 
 button {
@@ -101,5 +131,17 @@ button {
     top: 0;
     transform: translateX(-100%) translateY(0rem) rotateZ(180deg);
   }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition-property: opacity, transform;
+  transition-duration: $toggle-duration;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+  transform: translateX(-100%);
 }
 </style>
