@@ -3,6 +3,8 @@
 
 This is a responsive sidebar menu
 
+![Preview](./screenshot/Vue-Sidebar-Menu.gif)
+
 ## Stack
 
 Created with:
