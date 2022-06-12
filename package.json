@@ -2,7 +2,7 @@
   "name": "vue_sidebar_menu",
   "author": "Morteza Jamshidi <devmor.j@gmail.com>",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.2.0",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
