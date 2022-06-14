@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <div class="wrapper">Home Component</div>
+  <div class="wrapper">Home View</div>
 </template>
 
 <style scoped lang="scss">

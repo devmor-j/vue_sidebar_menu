@@ -10,6 +10,14 @@ const routes: Array<RouteRecordRaw> = [
     path: '/about',
     component: () => import('@/views/About.vue'),
   },
+  {
+    path: '/team',
+    component: () => import('@/views/Team.vue'),
+  },
+  {
+    path: '/contact',
+    component: () => import('@/views/Contact.vue'),
+  },
 ]
 
 export default routes
