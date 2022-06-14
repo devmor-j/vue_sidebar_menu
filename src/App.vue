@@ -25,5 +25,6 @@ import SidebarMenu from '@/components/SidebarMenu.vue';
 
 .router-view {
   grid-area: 'router-view';
+  padding: 1rem;
 }
 </style>

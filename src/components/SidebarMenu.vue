@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { shallowRef } from 'vue';
+import { RouterLink } from 'vue-router';
 import IconAngle from './icons/IconAngle.vue';
 import IconEmail from './icons/IconEmail.vue';
 import IconEmployeeGroup from './icons/IconEmployeeGroup.vue';
@@ -28,32 +29,40 @@ function toggleSidebar() {
         </li>
       </ul>
 
-      <span :transparent="!isSidebarOpen">Menu</span>
+      <h4 :transparent="!isSidebarOpen">Menu</h4>
 
       <ul>
         <li>
-          <IconHome />
-          <Transition name="fade">
-            <a href="/" v-show="isSidebarOpen">Home</a>
-          </Transition>
+          <router-link to="/">
+            <IconHome />
+            <Transition name="fade">
+              <span v-show="isSidebarOpen">Home</span>
+            </Transition>
+          </router-link>
         </li>
         <li>
-          <IconExclamation />
-          <Transition name="fade">
-            <a href="/about" v-show="isSidebarOpen">About</a>
-          </Transition>
+          <router-link to="/about">
+            <IconExclamation />
+            <Transition name="fade">
+              <span v-show="isSidebarOpen">About</span>
+            </Transition>
+          </router-link>
         </li>
         <li>
-          <IconEmployeeGroup />
-          <Transition name="fade">
-            <a href="/team" v-show="isSidebarOpen">Team</a>
-          </Transition>
+          <router-link to="/team">
+            <IconEmployeeGroup />
+            <Transition name="fade">
+              <span v-show="isSidebarOpen">Team</span>
+            </Transition>
+          </router-link>
         </li>
         <li>
-          <IconEmail />
-          <Transition name="fade">
-            <a href="/contact" v-show="isSidebarOpen">Contact</a>
-          </Transition>
+          <router-link to="/contact">
+            <IconEmail />
+            <Transition name="fade">
+              <span v-show="isSidebarOpen">Contact</span>
+            </Transition>
+          </router-link>
         </li>
       </ul>
     </aside>
@@ -65,6 +74,7 @@ function toggleSidebar() {
 
 $sidebar-width: 4rem;
 $toggle-duration: 300ms;
+$sidebar-padding-inline-start: 1rem;
 
 aside {
   color: clr.$primary;
@@ -72,7 +82,7 @@ aside {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  padding: 1rem;
+  padding-block: 1rem;
   transition: all $toggle-duration;
   width: $sidebar-width;
 }
@@ -81,10 +91,10 @@ aside[vue\:is-open=true] {
   width: 3 * $sidebar-width;
 }
 
-ul > li {
+ul {
   display: flex;
-  align-items: center;
-  column-gap: 0.75rem;
+  flex-direction: column;
+  gap: 0.5rem;
   padding-block-end: 1rem;
 }
 
@@ -94,15 +104,44 @@ img {
 
 li {
   min-width: fit-content;
-}
+  cursor: pointer;
+  padding-inline-start: $sidebar-padding-inline-start;
 
+  &:hover {
+    color: clr.$secondary;
+    background-color: lighten($color: clr.$bg-dark, $amount: 5);
+  }
+
+  & a {
+    // border-right: 0.25rem solid white;
+    display: flex;
+    align-items: center;
+    column-gap: 0.75rem;
+    position: relative;
+    padding-block: 0.5rem;
+  }
+
+  a.router-link-exact-active::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    width: 0.25rem;
+    height: 100%;
+    background-color: clr.$secondary;
+  }
+}
 .sidebar-head {
   position: relative;
   // padding-block-end: 4rem;
 }
 
-span {
+.sidebar-toggle {
+  padding-inline-start: $sidebar-padding-inline-start;
+}
+
+h4 {
   padding-block-end: 1rem;
+  padding-inline-start: $sidebar-padding-inline-start;
   user-select: none;
   pointer-events: none;
   opacity: 0.5;
@@ -112,7 +151,7 @@ span {
   transition: opacity $toggle-duration;
 }
 
-span[transparent=true] {
+h4[transparent=true] {
   opacity: 0;
 }
 
@@ -126,7 +165,6 @@ button {
   transform: translateX(0%) translateY(2rem) rotateZ(0deg);
 
   &.toggle-button {
-    color: red;
     left: 100%;
     top: 0;
     transform: translateX(-100%) translateY(0rem) rotateZ(180deg);
